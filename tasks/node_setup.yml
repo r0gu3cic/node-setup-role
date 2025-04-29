@@ -1,0 +1,66 @@
+---
+# Add source
+- name: Add source
+  shell: curl -fsSL https://deb.nodesource.com/setup_{{node.version}}.x | sudo -E bash -
+# Update repositories
+- name: Update repositories cache
+  apt: 
+    update_cache: yes
+
+# Install Node.js
+- name: Install Node.js
+  apt: 
+    name: nodejs
+    state: present
+# Install npm
+- name: Install npm
+  apt: 
+    name: npm
+    state: present
+# # Install yarn package manager
+# - name: Install yarn
+#   npm: 
+#     name: yarn
+#     global: true
+# Install build essentials
+- name: Install build-essentials
+  apt: 
+    name: build-essential
+    state: present
+- name: Install pm2
+  npm: 
+    name: pm2 
+    global: true
+
+# Version control
+- name: Install n
+  npm: 
+    name: n
+    global: true
+# # Install Node Version Manager (nvm)
+# - name: Install nvm
+#   shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+# Set specific node version
+- name: Set specific Node.js version
+  shell: n {{node.specific}}
+
+- name: Check installed Node.js version
+  command: node -v
+  register: node_version
+  changed_when: false
+  ignore_errors: true
+
+- name: Print Node.js version
+  ansible.builtin.debug:
+    msg: "Node.js version: {{ node_version.stdout }}"
+
+- name: Check installed npm version
+  command: npm -v
+  register: npm_version
+  changed_when: false
+  ignore_errors: true
+
+- name: Print npm version
+  ansible.builtin.debug:
+    msg: "npm version: {{ npm_version.stdout }}"
+

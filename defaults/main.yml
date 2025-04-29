@@ -1,0 +1,4 @@
+---
+node:
+  version: 20
+  specific: 20.19.1

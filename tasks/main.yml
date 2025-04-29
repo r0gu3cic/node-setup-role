@@ -1,0 +1,4 @@
+---
+- name: Setup Node.js on a server
+  import_tasks: node_setup.yml
+  when: ansible_facts['distribution'] | lower == 'ubuntu'
