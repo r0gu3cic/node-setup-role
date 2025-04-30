@@ -50,4 +50,4 @@ ansible-playbook tests/test.yml -i tests/local_inventory.ini -u root -k --extra-
 
 ------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+This role was created by Stefan, aka enabler, aka r0gu3cic. For any inquiries or further information, please reach out via [GitHub](https://github.com/r0gu3cic).
